@@ -1,8 +1,38 @@
 // import Image from "next/image";
+"use client"
+// import { Metadata } from "next";
+import { useEffect } from "react";
+import prisma from "@/lib/prisma";
+
+// export const metadata: Metadata = {
+//   title: {
+//     template: "%s | SocialApp",
+//     absolute: "SocialApp"
+//   },
+//   description: "The social media app for powernerds"
+// }
 
 export default function Home() {
+  useEffect(() => {
+    const createUser = async () => {
+      try {
+        const user = await prisma.user.create({
+          data: {
+            email: 'test@example.com',
+            name: 'Test User',
+          },
+        });
+        console.log('User created:', user);
+      } catch (error) {
+        console.error('Error creating user:', error);
+      }
+    };
+
+    createUser();
+  }, []);
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      test
       {/* <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
